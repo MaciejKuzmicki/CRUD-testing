@@ -1,24 +1,24 @@
 # Ignore Visual Studio files and folders
 .vscode/
 .vs/
-bin/
-obj/
-Debug/
-Release/
+**/[Dd]ebug/
+**/[Rr]elease/
+**/[Bb]in/
+**/[Oo]bj/
 *.user
 *.suo
 *.sln.docstates
 
 # Ignore NuGet package directory
-packages/
+**/packages/
 
 # Ignore Visual Studio project user-specific settings
 *.suo
 *.user
 
 # Ignore build and publish folders
-[Oo]ut/
-[Pp]ublish/
+**/[Oo]ut/
+**/[Pp]ublish/
 
 # Ignore Resharper files
 _ReSharper*
