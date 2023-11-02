@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace CRUD_test
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
