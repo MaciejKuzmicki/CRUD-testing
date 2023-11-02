@@ -1,0 +1,36 @@
+# Ignore Visual Studio files and folders
+.vscode/
+.vs/
+bin/
+obj/
+Debug/
+Release/
+*.user
+*.suo
+*.sln.docstates
+
+# Ignore NuGet package directory
+packages/
+
+# Ignore Visual Studio project user-specific settings
+*.suo
+*.user
+
+# Ignore build and publish folders
+[Oo]ut/
+[Pp]ublish/
+
+# Ignore Resharper files
+_ReSharper*
+
+# Ignore Rider files
+.idea/
+
+# Ignore Mac-specific files
+.DS_Store
+
+# Ignore Windows image file caches and thumbnails
+Thumbs.db
+
+# Ignore logs
+*.log
