@@ -5,34 +5,8 @@ using Xunit;
 
 namespace CRUD_test.Tests
 {
-    public class ProgramTests
+    public class DbUpdateTests
     {
-        [Fact]
-        public void Create_AddsProductToDatabase()
-        {
-            using (var productDbContext = CreateDbContext())
-            {
-                var program = new Program();
-
-                var newProduct = new Product
-                {
-                    Name = "NewProduct",
-                    Price = 19.99,
-                    Weight = 5.0,
-                    Description = "A new product for testing",
-                };
-
-                Program.Create(newProduct, productDbContext);
-
-                var retrievedProduct = Program.Get(newProduct.Id, productDbContext);
-                Assert.NotNull(retrievedProduct);
-                Assert.Equal(newProduct.Name, retrievedProduct.Name);
-                Assert.Equal(newProduct.Price, retrievedProduct.Price);
-                Assert.Equal(newProduct.Weight, retrievedProduct.Weight);
-                Assert.Equal(newProduct.Description, retrievedProduct.Description);
-            }
-        }
-
         [Fact]
         public void Update_UpdatesProductInDatabase()
         {
@@ -61,8 +35,52 @@ namespace CRUD_test.Tests
             }
         }
 
+        [Fact]
+        public void Update_ThrowsArgumentNullExceptionForNullProduct()
+        {
+            using (var productDbContext = CreateDbContext())
+            {
+                Product nullProduct = null;
 
+                Assert.Throws<ArgumentNullException>(() => Program.Update(nullProduct, productDbContext));
+            }
+        }
 
+        [Fact]
+        public void Update_ThrowsArgumentExceptionForNonPositiveId()
+        {
+            using (var productDbContext = CreateDbContext())
+            {
+                var updatedProduct = new Product
+                {
+                    Id = 0,
+                    Name = "UpdatedProduct",
+                    Price = 24.99,
+                    Weight = 6.0,
+                    Description = "An updated product for testing",
+                };
+
+                Assert.Throws<ArgumentException>(() => Program.Update(updatedProduct, productDbContext));
+            }
+        }
+
+        [Fact]
+        public void Update_ThrowsInvalidOperationExceptionForNonExistingProduct()
+        {
+            using (var productDbContext = CreateDbContext())
+            {
+                var updatedProduct = new Product
+                {
+                    Id = 999,
+                    Name = "UpdatedProduct",
+                    Price = 24.99,
+                    Weight = 6.0,
+                    Description = "An updated product for testing",
+                };
+
+                Assert.Throws<InvalidOperationException>(() => Program.Update(updatedProduct, productDbContext));
+            }
+        }
 
         private ProductDbContext CreateDbContext()
         {
